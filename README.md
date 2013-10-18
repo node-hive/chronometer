@@ -8,12 +8,25 @@ More complex intervals can be expressed as  a function that recievs the time as 
 
 The cronomter mixin fires off at -1000... (very negative number) so other mixins can use it.
 
-## Installing Chronometer
+## Installing Chronometer in hive-mvc
 
 put the chronometer file in any resources/mixins folder.
 you should not have more than one chronometer in a hive-mvc project;
 it is written to only install itself
 if there is not a chronometer in the apiary's config already.
+
+## Using Chronomter outside of hive-mvc.
+
+the export of chronometer is a function for use in hive-mvc; however it does have a Chronometer constructor as a property so
+you can just call;
+
+``` javascript
+    var my_sandbox = {};
+    var my_chron = new (require('./chronometer.js'))Chronometer(my_sandbox);
+
+```
+
+The single argument to Chronometer(Chron_Manager) isn't used any way by Chronometer.
 
 ## Example mixin using Chronometer:
 
@@ -81,3 +94,18 @@ that the manager emits.
 
 The manager's clock can be started and stopped; you can call `manager.stop_clock()` or `manager.start_clock`.
 This is useful for unit tests or other scenarios where you want to control the execution of long tasks.
+
+You could, for instnace, stop the clock and fire off times at whatever interval you please -- every five minutes,
+every 15 minutes, every hour....
+
+## Why this doesn't use/emulate CHRON
+
+I find the notation of Chron overly arcane. I figured its best to just handle the "Extreme" scenarios:
+
+1. You want to do something on a regular interval (pretty common)
+2. You want to do something on a strange interval (for which you can write a function).
+
+Giving you a function that interprets an absolute time really frees you up. You can execute on a given set of
+absolute dates, or even pull a set of times from a data feed and execute on those times.
+
+If the Chron system of notation works for you, using node-chron is pretty easy, and chronometer is not the module for you.

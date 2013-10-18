@@ -1,6 +1,5 @@
 {
     "name": "chronometer",
-    "privtae": true,
     "version": "0.0.1",
     "description": "a hive-mvc mixin to fire off events at given intervals",
     "main": "chronometer.js",

@@ -115,4 +115,6 @@ module.exports = function (apiary, cb) {
             done();
         }
     }); // end callback
-}
+};
+
+module.exports.Chronomter = Chron_Manager;
